@@ -49,12 +49,39 @@ You have REST API method /users/api/users with responce:
 ```
 We need check JSON structure.
 
+I want
+------------
+Check JSON structure easy, somting like this:
+```php
+$I->wantTo('Check GET /users/api/users');
+
+$I->haveHttpHeader('Accept', 'application/json');
+
+$I->sendGET('/users/api/users');
+
+$I->seeResponseCodeIs(200);
+$I->seeResponseIsJson();
+
+$response = json_decode($I->grabResponse(), true);
+
+$I->assertJsonStructure(
+'{
+    "user_id": <integer>,
+    "surname": <string|null>,
+    "name": <string>,
+    "username": <string>,
+    "email_main": <string>,
+    "location": <location>,
+}',
+$response);
+```
+
 Solution
 ------------
 1. Download, install and initialize Codeception (http://codeception.com/).
 2. Add FunctionalHelper.php (https://github.com/t4web/AssertJsonStructure/blob/master/tests/_support/FunctionalHelper.php) in your tests/_support/
 
-Now you can use `assertJsonStructure()` function for checking JSON structure. Supported types: `boolean`, `integer`, `float`, `double`, `string`, `array`, `NULL`, `null` and custom type `dateTime`. You can add any complex types.
+  Now you can use `assertJsonStructure()` function for checking JSON structure. Supported types: `boolean`, `integer`,   `float`, `double`, `string`, `array`, `NULL`, `null` and custom type `dateTime`. You can add any complex types.
 
 3. Write Functional test like this https://github.com/t4web/AssertJsonStructure/blob/master/functional/UsersCest.php
 
