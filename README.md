@@ -51,7 +51,7 @@ We need check JSON structure.
 
 I want
 ------------
-Check JSON structure easy, somting like this:
+Check JSON structure easy, something like this:
 ```php
 $I->wantTo('Check GET /users/api/users');
 
